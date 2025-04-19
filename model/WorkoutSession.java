@@ -37,4 +37,12 @@ public class WorkoutSession {
     public Map<Exercise, SetCounter> getProgress() {
         return progress;
     }
+
+    public void addExerciseToProgress(Exercise exercise) {
+        progress.put(exercise, new SetCounter());
+    }
+
+    public WorkoutPlan getWorkoutPlan() {
+        return workoutPlan;
+    }
 }
