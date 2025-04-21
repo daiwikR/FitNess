@@ -36,9 +36,12 @@
 package fitnesstracker.controller;
 
 import fitnesstracker.model.Reminder;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class ReminderController {
     private List<Reminder> reminders;
@@ -53,9 +56,14 @@ public class ReminderController {
         Reminder reminder = new Reminder(message, dateTime);
         reminders.add(reminder);
 
-        FileWriter writer = new FileWriter("C:/Users/bhave/Desktop/Sem 6/OOAD/Daiwik_proj/fitnesstracker/controller/test1.txt", true){
-            writer.write("HI");
-        }
+        try (FileWriter writer = new FileWriter("logs/test1.txt", true)) {
+             writer.write("HI\n");
+        } 
+    catch (IOException e) 
+    {
+        e.printStackTrace();
+    }
+
 
         notifier.addRemindering(reminder); // Schedules the reminder notification
     }

@@ -64,11 +64,14 @@ package fitnesstracker.controller;
 import fitnesstracker.model.Reminder;
 import java.awt.*;
 import java.awt.TrayIcon.MessageType;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
 
 public class ReminderNotifier {
     private ScheduledExecutorService scheduler;
