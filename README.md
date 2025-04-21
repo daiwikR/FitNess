@@ -37,15 +37,17 @@ This Java application was built as a **semester project** for the Object-Oriente
 
 ## 🗂️ Folder Structure
 
-<pre>
-          FitNess/ 
-          ── fitnesstracker/ 
-           ├── model/ 
-           ├── controller/ 
-           ├── view/ 
-          └── Main.java 
-</pre>
-
+```bash
+FitNess/
+├── fitnesstracker/
+│   ├── model/         # Business logic: Workout, BMI, Meal, Reminder
+│   ├── controller/    # Controllers to modify model data
+│   ├── view/          # Swing GUI panels
+│   └── Main.java      # Entry point
+├── screenshots/       # App UI screenshots (for GitHub display)
+├── out/               # Compiled .class files (auto-generated)
+└── README.md
+```
 
 
 ---
