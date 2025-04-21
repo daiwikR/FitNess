@@ -37,7 +37,9 @@ This Java application was built as a **semester project** for the Object-Oriente
 
 ## 🗂️ Folder Structure
 
-<pre> ```bash FitNess/ └── fitnesstracker/ ├── model/ ├── controller/ ├── view/ └── Main.java ``` </pre>
+<pre>
+ FitNess/ └── fitnesstracker/ ├── model/ ├── controller/ ├── view/ └── Main.java 
+</pre>
 
 
 
