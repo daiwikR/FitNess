@@ -81,6 +81,24 @@ javac -d out fitnesstracker/**/*.java
  ```bash
 java -cp out fitnesstracker.Main
 ```
+
+
+## 🖼️ Screenshots
+
+### 🏠 Landing Page
+![Landing Panel](screenshots/landing.png)
+
+### 📊 Progress Graph (Bar Chart)
+![Progress Chart](screenshots/progress.png)
+
+### 🏋️ Workout Session Panel
+![Workout Session](screenshots/Workout_Session.png)
+
+
+
+
+
+
 License
 This project is licensed under the MIT License.
 
