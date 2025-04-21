@@ -48,6 +48,22 @@ public class WorkoutSessionController {
         }
     }
 
+    public void syncWithWorkoutPlan() {
+        // Get the workout plan from the session
+        WorkoutPlan workoutPlan = session.getWorkoutPlan();
+        
+        // Add any new exercises from the plan to the session
+        for (Exercise exercise : workoutPlan.getExercises()) {
+            if (!session.getProgress().containsKey(exercise)) {
+                session.addExerciseToProgress(exercise);
+            }
+        }
+    }
+
+    public void changeWorkoutPlan(WorkoutPlan newPlan) {
+        this.session = new WorkoutSession(newPlan);
+    }
+
     public WorkoutSession getSession() {
         return session;
     }

@@ -41,4 +41,19 @@ public class ProgressGraphPanel extends JPanel {
             i++;
         }
     }
+    
+    /**
+     * Updates the session being displayed
+     */
+    public void setSession(WorkoutSession session) {
+        this.session = session;
+        repaint(); // Trigger a repaint to show the new session data
+    }
+    
+    /**
+     * Refreshes the graph with current workout session data
+     */
+    public void refresh() {
+        repaint();
+    }
 }

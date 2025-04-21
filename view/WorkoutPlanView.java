@@ -82,6 +82,8 @@ public class WorkoutPlanView extends JPanel {
 
                 if (!name.isEmpty() && !desc.isEmpty() && !muscle.isEmpty()) {
                     Exercise newExercise = new Exercise(name, desc, muscle);
+                    
+                    // Add exercise to the workout plan
                     workoutPlan.addExercise(newExercise);
                     exerciseListModel.addElement(newExercise);
 
@@ -89,6 +91,9 @@ public class WorkoutPlanView extends JPanel {
                     exerciseNameField.setText("");
                     exerciseDescField.setText("");
                     exerciseMuscleField.setText("");
+                    
+                    // Update any active workout sessions
+                    updateActiveWorkoutSessions();
                 } else {
                     JOptionPane.showMessageDialog(
                         WorkoutPlanView.this,
@@ -107,6 +112,7 @@ public class WorkoutPlanView extends JPanel {
                 if (selected != null) {
                     workoutPlan.removeExercise(selected);
                     exerciseListModel.removeElement(selected);
+                    updateActiveWorkoutSessions();
                 } else {
                     JOptionPane.showMessageDialog(
                         WorkoutPlanView.this,
@@ -117,5 +123,36 @@ public class WorkoutPlanView extends JPanel {
                 }
             }
         });
+    }
+
+
+    private void updateActiveWorkoutSessions() {
+        // Find all open frames
+        Frame[] frames = Frame.getFrames();
+        for (Frame frame : frames) {
+            if (frame instanceof JFrame) {
+                JFrame jframe = (JFrame) frame;
+                // Look for tabbed panes containing WorkoutSessionView
+                for (Component comp : jframe.getContentPane().getComponents()) {
+                    if (comp instanceof JTabbedPane) {
+                        JTabbedPane tabbedPane = (JTabbedPane) comp;
+                        // Check each tab for WorkoutSessionView
+                        for (int i = 0; i < tabbedPane.getTabCount(); i++) {
+                            Component tabComp = tabbedPane.getComponentAt(i);
+                            if (tabComp instanceof WorkoutSessionView) {
+                                WorkoutSessionView sessionView = (WorkoutSessionView) tabComp;
+                                // Check if this session is using our workout plan
+                                if (sessionView.getSession().getWorkoutPlan() == workoutPlan) {
+                                    // Need to add the syncWithWorkoutPlan method to WorkoutSessionController
+                                    // and actually implement it in that class
+                                    sessionView.getSessionController().syncWithWorkoutPlan();
+                                    sessionView.refreshExerciseList();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

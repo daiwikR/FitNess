@@ -78,6 +78,18 @@ public class WorkoutPlanManagerView extends JPanel {
                 JOptionPane.showMessageDialog(WorkoutPlanManagerView.this, "Select a plan to edit.");
             }
         });
+
+
+
+        planJList.addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                WorkoutPlan selectedPlan = planJList.getSelectedValue();
+                if (selectedPlan != null) {
+                    // Find any active workout session views and update them
+                    updateActiveWorkoutSessions(selectedPlan);
+                }
+            }
+        });
     }
 
     private void refreshPlanList() {
@@ -86,4 +98,34 @@ public class WorkoutPlanManagerView extends JPanel {
             planListModel.addElement(plan);
         }
     }
+
+
+
+        private void updateActiveWorkoutSessions(WorkoutPlan selectedPlan) {
+        // Find all frames
+        Frame[] frames = Frame.getFrames();
+        for (Frame frame : frames) {
+            if (frame instanceof JFrame) {
+                JFrame jframe = (JFrame) frame;
+                // Find tabbedPane
+                for (Component comp : jframe.getContentPane().getComponents()) {
+                    if (comp instanceof JTabbedPane) {
+                        JTabbedPane tabbedPane = (JTabbedPane) comp;
+                        // Check each tab
+                        for (int i = 0; i < tabbedPane.getTabCount(); i++) {
+                            Component tabComp = tabbedPane.getComponentAt(i);
+                            if (tabComp instanceof WorkoutSessionView) {
+                                WorkoutSessionView sessionView = (WorkoutSessionView) tabComp;
+                                // Update the workout plan
+                                sessionView.getSessionController().changeWorkoutPlan(selectedPlan);
+                                sessionView.refreshExerciseList();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    
 }
